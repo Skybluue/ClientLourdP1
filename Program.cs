@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using TryDapper;
 
 namespace ClientLourdP1
@@ -15,12 +16,13 @@ namespace ClientLourdP1
                 Password = ""
             };
 
-            int choixUser;
-            do
-            {
-                choixUser = Interface.Afficher();
-                Interface.TraiterChoix(choixUser, dbCon);
-            } while (choixUser != 4);
+                int choixUser;
+                do
+                {
+                    choixUser = Interface.Afficher();
+                    Interface.TraiterChoix(choixUser, dbCon);
+                } while (choixUser != 3);
+            
         }
     }
 }
