@@ -44,10 +44,9 @@ namespace PPE_Salons
                     cmd.Parameters["@LePass"].Direction = ParameterDirection.Input;
                     cmd.Parameters["@LePass"].Value = SHA.GenerateSHA1String(textBoxMdp.Text);
 
-                    cmd.Parameters.Add("@Niveau", MySqlDbType.Int32);
-                    cmd.Parameters["@Niveau"].Direction = ParameterDirection.Input;
-                    cmd.Parameters["@Niveau"].Value = LevelUser;
-
+                    cmd.Parameters.Add("@LeNiveau", MySqlDbType.Int32);
+                    cmd.Parameters["@LeNiveau"].Direction = ParameterDirection.Input;
+                    cmd.Parameters["@LeNiveau"].Value = LevelUser;
 
                     cmd.ExecuteNonQuery();
 
@@ -61,7 +60,7 @@ namespace PPE_Salons
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
-                MessageBox.Show("Erreur");
+                MessageBox.Show("Erreur " + ex);
             }
         }
 

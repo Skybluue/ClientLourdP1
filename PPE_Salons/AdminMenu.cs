@@ -34,25 +34,23 @@ namespace PPE_Salons
             dbCon.Password = "";//Crypto.Decrypt("MGgAtv/61oXwMgJN47ilHg==");//Pour éviter d'afficher le mot de passe en clair dans le code
             if (dbCon.IsConnect())
             {
-                string query = "SELECT Id, Nom, Prenom, Email FROM contact ORDER BY Nom";
+                string query = "SELECT id, nom, niveau FROM utilisateur ORDER BY id";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();//Remplissage du curseur
-                List<Contact> contacts = new List<Contact>();
+                List<Utilisateur> users = new List<Utilisateur>();
                 while (reader.Read())
                 {
-                    Contact contact = new Contact
+                    Utilisateur user = new Utilisateur
                     {
-                        Id = (int)reader["Id"],
-                        Nom = (string)reader["Nom"],
-                        Prenom = (string)reader["Prenom"],
-                        Email = (string)reader["Email"],
-
+                        Id = (int)reader["id"],
+                        Nom = (string)reader["nom"],
+                        Niveau = (int)reader["niveau"],
                     };
-                    contacts.Add(contact);
+                    users.Add(user);
                 }
 
                 MaGrid.DataSource = null;
-                MaGrid.DataSource = contacts;
+                MaGrid.DataSource = users;
                 FormaterListe();
                 reader.Close();
                 dbCon.Close();
@@ -63,9 +61,7 @@ namespace PPE_Salons
 
         private void FormaterListe()
         {
-            MaGrid.Columns["Id"].Visible = false;
-            MaGrid.Columns["Nom"].HeaderText = "Nom du participant";
-            MaGrid.Columns["Nom"].Width = 150;
+            MaGrid.Columns["Nom"].HeaderText = "Nom d'utilisateur";
             MaGrid.MultiSelect = false;
             MaGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             MaGrid.ReadOnly = true;
