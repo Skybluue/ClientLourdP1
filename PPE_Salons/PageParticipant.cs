@@ -15,8 +15,11 @@ namespace PPE_Salons
     public partial class PageParticipant : Form
     {
         Contact LeParticipant;
-        public PageParticipant(Contact unParticipant)
+
+        public int TypeCo;
+        public PageParticipant(Contact unParticipant, int LeTypeCo)
         {
+            TypeCo = LeTypeCo;
             InitializeComponent();
             LeParticipant = unParticipant;
             tbNom.Text = unParticipant.Nom;
@@ -58,7 +61,7 @@ namespace PPE_Salons
                 IsOK = false;
             }
             if(IsOK)
-            LeParticipant.Save();
+            LeParticipant.Save(TypeCo);
             Error3.Text = "Enregistrement effectué";
         }
 
